@@ -42,7 +42,13 @@ Follow these steps to set up the project locally:
 Clone this repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/call-meRavi-SHORT-CODE/PlotWise.git`
+git clone https://github.com/call-meRavi-SHORT-CODE/PlotWise.git bash``
+```
+### 2. Installing Dependencies
 
-**Installing Dependencies**: Runs `pip install -r requirements.txt` to install the necessary packages.
+ Run to install the necessary packages.
+ ```bash
+ pip install -r requirements.txt` 
+```
+### 3. Set your API key
 
