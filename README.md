@@ -42,7 +42,7 @@ Follow these steps to set up the project locally:
 Clone this repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/call-meRavi-SHORT-CODE/PlotWise.git bash``
+git clone https://github.com/call-meRavi-SHORT-CODE/PlotWise.git 
 ```
 ### 2. Installing Dependencies
 
@@ -51,4 +51,21 @@ git clone https://github.com/call-meRavi-SHORT-CODE/PlotWise.git bash``
  pip install -r requirements.txt` 
 ```
 ### 3. Set your API key
+
+```bash
+os.environ['GOOGLE_API_KEY'] = "your_gemini_api_key" # Gemini API key
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY') 
+genai.configure(api_key=GOOGLE_API_KEY)
+os.environ["COHERE_API_KEY"] = "your_cohere_api_key"  # Cohere API key
+```
+### 4. Set your CSV data Path
+
+```bash
+csv = "file_path" # replace your file path here
+```
+
+### Run
+```bash
+python app.py
+```
 
