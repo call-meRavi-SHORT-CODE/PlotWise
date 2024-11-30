@@ -1,0 +1,10 @@
+google-generativeai
+dash
+pandas
+llmx
+lida
+plotly
+Pillow
+dash-core-components
+dash-html-components
+dash-tables
