@@ -23,3 +23,7 @@ Break barriers in data interpretation and let PlotWise do the heavy lifting!
 
 👉 [Click here to watch the demo](https://drive.google.com/file/d/1TnhZmqlaYq7BXWTJyvr9edGDUXx3v22v/view?usp=sharing)
 
+# Chatbot Architecture
+![Inputs](architecture.png)
+
+
