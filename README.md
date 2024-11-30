@@ -79,37 +79,49 @@ This was my first approach for this assignment:
 
 ![Inputs](approch1.png)
 
-**Approch:**
+#### Approach:
 1) Set up the Llama 2 LLM locally.
 2) Extracted data from a CSV file using LangChain.
-3) Split the data into text chunks and converted them into embeddings.
+3) Split the data into text chunks and convert them into embeddings.
 4) Stored the embeddings in a vector database.
 5) Used semantic search for data retrieval through RAG (user prompt).
 
-**Problems faced:**
+No positives....
+
+#### Problems faced:
 1) Setting up the Llama 2 model locally.
 2) Issues during the conversion of text chunks into embeddings.
 3) Semantic search is not efficient enough for retrieval.
 
-but finally the approch ended with failure... 😔
+but finally, the approach ended with failure... 😔
 
 # Failure Approach 2 ❌👎
-this was my second approch this assignment:
+this was my second approach to this assignment:
 
 
 
-**Approach:**
+#### Approach:
 1) I used the Gemini API to read the CSV file (which converts it into a string).
 2) Using Gemini, I analyzed the CSV file and generated responses for the user input.
 3) Based on the user input, I generated code for the charts and executed it.
 
-**Positives:**
+#### Positives:
 1) Able to analyze the data successfully.
 2) The model is able to answer some queries regarding the data.
-3) In some cases it also generates charts for user query.
+3) In some cases it also generates charts for user queries.
 
-**Problems faced:**
+#### Problems faced:
 1) Encountered problems while fetching the code from the response.
 2) Unable to run the generated code; it returns a syntax error for the Gemini-generated chart code.
 
-After so much Efforts this approach also ended in failure... 😔
+After so much effort, this approach also ended in failure... 😔
+
+
+### Finally Done 
+
+![Inputs](plotwise.png)
+
+**Watch the demo of Lida in Coloab** 
+
+👉 [Click here to watch the demo1](https://drive.google.com/file/d/1E0ifv1yuSXvcpSoS3fVWoseD-fdXx3li/view?usp=sharing)
+👉 [Click here to watch the demo2](https://drive.google.com/file/d/18JG9R-aq2wjUYKWW9THD9Iu-JSZ0rczh/view?usp=sharing)
