@@ -42,5 +42,5 @@ Follow these steps to set up the project locally:
 Clone this repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/call-meRavi-SHORT-CODE/PlotWise.git
 
