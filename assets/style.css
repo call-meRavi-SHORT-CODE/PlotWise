@@ -1,0 +1,191 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 100%;
+    background: #FFFF;
+}
+
+*, html {
+    --primaryGradient: linear-gradient(93.12deg, #350582 0.52%, #350582 100%);
+    --secondaryGradient: linear-gradient(268.91deg, #350582 -2.14%, #350582 99.69%);
+    --primaryBoxShadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    --secondaryBoxShadow: 0px -10px 15px rgba(0, 0, 0, 0.1);
+    --primary: #350582;
+}
+
+/* CHATBOX
+=============== */
+.chatbox {
+    position: absolute;
+    top: 0px;
+    left: 10vw;
+}
+
+
+/* CONTENT IS ALWAYS ACTIVE */
+.chatbox__support {
+    display: flex;
+    flex-direction: column;
+    background: #eee;
+    width: 80vw;  /* Set the width to 50% of the viewport width */
+    height: 100vh; /* Set the height to 80% of the viewport height */
+    z-index: 9999;  /* Ensure chatbox is always on top */
+    opacity: 1;  /* Make the chatbox visible */
+    transition: none;  /* Remove the transition effect */
+}
+
+
+
+
+.send__button {
+    padding: 10px 10px; /* Add more padding for better clickability */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    font-size: 16px; /* Slightly larger font */
+   
+    border: none; /* Remove border */
+    border-radius: 15px; /* Rounded corners */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition effects */
+}
+
+.send__button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.send__button:active {
+    background-color: #3e8e41; /* Even darker green when pressed */
+    transform: scale(0.95); /* Slight shrink effect when clicked */
+}
+
+/* HEADER */
+.chatbox__header {
+    position: sticky;
+    top: 0;
+    background: var(--primaryGradient);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    
+    
+    .send__button:hover {
+        background-color: #45a049; /* Slightly darker green on hover */
+        transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+    
+    .send__button:active {
+        background-color: #3e8e41; /* Even darker green when pressed */
+        transform: scale(0.95); /* Slight shrink effect when clicked */
+    }
+    box-shadow: var(--primaryBoxShadow);
+}
+
+.chatbox__heading--header {
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    
+}
+
+.chatbox__description--header {
+    font-size: .9rem;
+    color: white;
+}
+
+/* MESSAGES */
+.chatbox__messages {
+    margin-top: auto;
+    padding: 0 20px;
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+}
+
+.messages__item {
+    background: #E0E0E0;
+    max-width: 70%;
+    padding: 8px 12px;
+}
+
+.messages__item--visitor,
+.messages__item--typing {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.messages__item--operator {
+    background: var(--primary);
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+/* FOOTER */
+.chatbox__footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 20px;
+    background: var(--secondaryGradient);
+    box-shadow: var(--secondaryBoxShadow);
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.chatbox__footer input {
+    width: 80%;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 30px;
+    text-align: left;
+    height: 100%;
+    font-size: 16px;
+}
+
+.chatbox__send--footer {
+    color: white;
+}
+
+.chatbox__button button,
+.chatbox__button button:focus,
+.chatbox__button button:visited {
+    appearance: none;
+    background-color: #2ea44f;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
