@@ -19,7 +19,7 @@ from io import BytesIO
 import base64
 
 
-csv = "data.csv" # replace with your csv file path
+csv = "file_path" # replace with your csv file path
 
 os.environ['GOOGLE_API_KEY'] = "your_gemini_api_key" 
 
