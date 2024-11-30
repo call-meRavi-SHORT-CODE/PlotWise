@@ -4,3 +4,13 @@
 [![Lida](https://img.shields.io/badge/Lida-%23FFD700.svg?style=flat&logo=python&logoColor=white)](https://microsoft.github.io/lida/)
 [![Lida](https://img.shields.io/badge/Lida-%23181717.svg?style=flat&logo=github&logoColor=white)](https://github.com/microsoft/lida)
 
+
+# PlotWise: A chatbot assistant to analyze and visualize your data effortlessly 📈📊
+
+Imagine a world where data analysis and visualization come alive seamlessly 🌟.
+PlotWise empowers individuals to:
+
+1) **Chat with your data:** Ask questions and get real-time insights effortlessly 📊.
+2) **Unlock potential:** Make informed decisions in business, education, and research 🚀.
+3) **See it clearly:** Turn complex datasets into stunning, easy-to-understand visuals 🖼️.
+Break barriers in data interpretation and let PlotWise do the heavy lifting!
