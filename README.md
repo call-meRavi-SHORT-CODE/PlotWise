@@ -16,3 +16,7 @@ Features:
 Break barriers in data interpretation and let PlotWise do the heavy lifting!
 
 ![Inputs](UI.png)
+
+🎥 **Watch the demo of PlotWise in action** to see how it can help you interact with your data effortlessly!
+
+👉 [Click here to watch the demo](https://drive.google.com/file/d/1TnhZmqlaYq7BXWTJyvr9edGDUXx3v22v/view?usp=sharing)
