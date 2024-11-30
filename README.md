@@ -15,7 +15,8 @@ Features:
 3) **See it clearly:** Turn complex datasets into stunning, easy-to-understand visuals.
 Break barriers in data interpretation and let PlotWise do the heavy lifting!
 
-![Inputs](UI.png)
+<img src="UI.png" alt="Inputs" width="400" />
+
 
 🎥 **Watch the demo of PlotWise in action** to see how it can help you interact with your data effortlessly!
 
