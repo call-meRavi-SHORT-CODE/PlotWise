@@ -68,8 +68,13 @@ csv = "file_path" # replace your file path here
 ```bash
 python app.py
 ```
+Click http://127.0.0.1:8050/
+
+![Inputs](UI.png)
+
 
 
 # Failure Approach 1 ❌👎
 This was my first approach for the assignment which ended in failure.
+![Inputs](approch1.png)
 
