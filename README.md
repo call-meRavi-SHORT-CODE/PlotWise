@@ -32,3 +32,15 @@ Break barriers in data interpretation and let PlotWise do the heavy lifting!
 3) faced problem with Configuration of llm in lida
 4) I encountered a problem with chart visualization using Lida: "Index out of range for img."
 
+
+## Setup
+
+Follow these steps to set up the project locally:
+
+### 1. Clone the Repository
+
+Clone this repository to your local machine using the following command:
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+
