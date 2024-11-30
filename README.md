@@ -64,8 +64,12 @@ os.environ["COHERE_API_KEY"] = "your_cohere_api_key"  # Cohere API key
 csv = "file_path" # replace your file path here
 ```
 
-### Run
+### 5. Run
 ```bash
 python app.py
 ```
+
+
+# Failure Approach 1 ❌👎
+This was my first approach for the assignment which ended in failure.
 
