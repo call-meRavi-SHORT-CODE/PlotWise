@@ -117,9 +117,7 @@ this was my second approach to this assignment:
 After so much effort, this approach also ended in failure... 😔
 
 
-# Finally Done 🎉😊
 
-![Inputs](plotwise.png)
 
 **Watch the demo of Lida in Coloab** 
 
