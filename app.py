@@ -1,42 +1,73 @@
+
+# import the required Libraries
 import google.generativeai as genai
+import pandas as pd
+import os
+from langchain_groq.chat_models import ChatGroq
+from pandasai import SmartDataframe
+
+# Dash
 import dash
 from dash import html
-import time
-import pandas as pd
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
-import time
-from llmx import  llm, TextGenerationConfig
-import os
 from dash import dash_table
-import plotly.express as px  
-import sys
-import io
-from lida import Manager, llm
 from dash.dash_table import DataTable
-from PIL import Image
+
+# Lida
+from lida import Manager, llm
+from llmx import  llm, TextGenerationConfig
+from pandasai import clear_cache
+
+import json
+import re
+
+import matplotlib
+matplotlib.use('agg')
 from io import BytesIO
 import base64
+from io import BytesIO
+import base64
+from PIL import Image
 
 
-csv = "file_path" # replace with your csv file path
+## LLM (Groq Cloud)
 
-os.environ['GOOGLE_API_KEY'] = "your_gemini_api_key" 
+bot = ChatGroq(
+            temperature=0,
+            groq_api_key= "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",
+            model_name="llama-3.3-70b-versatile"
+        )
 
 
-GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY') 
-genai.configure(api_key=GOOGLE_API_KEY)
+## CSV File 
+data = pd.read_csv("data.csv")
 
-os.environ["COHERE_API_KEY"] = "your_cohere_api_key"  
+config = {"save_charts":True,
+              "save_charts_path":"F:\Assignment",
+             
+              "conversational":True,
+              "enable_cache": False,
+              "llm": bot}
+
+df = SmartDataframe(data,config= config)
+
+
+
+
+######### LIDA Setup  ##############
+
+
+os.environ["COHERE_API_KEY"] = "6SIporsWbvu2eASwB0rR7cI7FassEl5X1LQDJy5E"  
 lida = Manager(text_gen = llm("cohere"))  # we can also use openai 
 
-model = genai.GenerativeModel("gemini-1.5-flash")
 
 
 
 
 
 # Initialize the Dash app
+
 app = dash.Dash(__name__)
 
 # Define the layout of the app
@@ -69,7 +100,7 @@ app.layout = html.Div(
                                 'height': '80vh',
                                 'overflowY': 'scroll',
                                 'padding': '10px',
-                                'backgroundColor': '#ffffff',
+                                'backgroundColor': '#FAF9F6',
                                 'borderRadius': '10px'
                             }
                         ),
@@ -109,18 +140,8 @@ chat_history = []
 )
 
 
-
-
-
-
-
-
-
-
-
-
-
 def update_chat(n_clicks, user_message):
+    
     global chat_history
     global bot_response
 
@@ -190,8 +211,6 @@ def update_chat(n_clicks, user_message):
         
         chat_history.insert(0,a3)
 
-
-
     # Check if there is any input and if the button was clicked
     if n_clicks > 0 and user_message:
         # Append the user's message first, aligned to the right
@@ -213,45 +232,25 @@ def update_chat(n_clicks, user_message):
             )
         chat_history.insert(0, user_message_div)
 
-        def base64_to_image(base64_string):
-                # Decode the base64 string
-                byte_data = base64.b64decode(base64_string)
-                # Use BytesIO to convert the byte data to image
-                return Image.open(BytesIO(byte_data))    
-
+       
         
-        user_query = user_message
-        
-        library = "seaborn"
-        summary = lida.summarize(csv, summary_method="default")
-        Charts = lida.visualize(summary=summary, goal=user_query,library=library)
-        img_base64_string = Charts[0].raster
-        image = base64_to_image(img_base64_string)
-        image.save("img.png")
-        img = "img.png"
-        with open(img, "rb") as f:
-            encoded_image = base64.b64encode(f.read()).decode()
 
+       
+                
+        
+
+        if "summary" in user_message.lower():
+            summary = lida.summarize("data.csv", summary_method="default")
+            response = bot.invoke(f" As you are a Professional Data Analyst, give me only breif summary (dont bold the words) 120-150 words only of the given data: {summary}")
+            bot_response = response.content
             
-        img_response = html.Img(src=f"data:image/jpeg;base64,{encoded_image}",
-                style={
-                "width": "50%",  # Adjust size as needed
-                "float": "left",
-            "margin-right": "10px",
-                
-            })
-        chat_history.insert(0, img_response) 
-                
-        
-         
-
-        
-        if "summary" in user_message:
-            summary = lida.summarize(csv, summary_method="default")
-            response = model.generate_content(f"give me breif summary (dont bold the words) of the in 80-90 words of the given data: {summary}")
-            bot_response = response.text
             response_text =  html.Div(
-                bot_response,
+
+                children=[
+                    html.H1("Summary:",style={"font-weight": "bold",'font-size': '1.2rem'}),
+                    html.P( [html.Br(), bot_response])
+            ],
+             
                 style={
                     'textAlign': 'left',
                     'padding': '10px',
@@ -266,52 +265,18 @@ def update_chat(n_clicks, user_message):
             )
             chat_history.insert(0, response_text)
 
-        if "trend" in user_message:
-            summary = lida.summarize(csv, summary_method="default")
-            response = model.generate_content(f"give me  the trend of the data over time: {summary}")
-            bot_response = response.text
-            response_text =  html.Div(
-                bot_response,
-                style={
-                    'textAlign': 'left',
-                    'padding': '10px',
-                    'backgroundColor': '#f0f0f0',
-                    'borderRadius': '10px',
-                    'marginBottom': '10px',
-                    'width': 'fit-content',
-                    'maxWidth': '70%',
-                    'alignSelf': 'flex-start',
-                    'font-size': '1.2rem'
-                }
-            )
-            chat_history.insert(0, response_text)
 
-        
 
-            
-        
-        if "goal" in user_message:
-            summary = lida.summarize(csv, summary_method="default")
-            goals = lida.goals(summary, n=2)
-
-            
-            
-            
-            for i in range(len(goals)): 
-                a1 = f'Goal {i+1}:'
-                a2 = f'Question: {goals[i].question}'
-                a33 = f'Visualization: {goals[i].visualization}'
-                a4 = f'Reason: {goals[i].rationale}'
-            
+        if "trends" in user_message.lower():
+            summary = lida.summarize("data.csv", summary_method="default")
+            response = bot.invoke(f" As you are a Professional Data Analyst, give me trends and key insights (dont bold the words) 120-150 words only of the given data: {summary}")
+            bot_response = response.content
                 
-                response_text =  html.Div(
+            response_text =  html.Div(
                     children=[
-                    html.P(str(a1)),
-                    html.P(str(a2)),
-                    html.P(str(a33)),
-                    html.P(str(a4)),
-
-                ],
+                    html.H1("key insights and trends:",style={"font-weight": "bold",'font-size': '1.2rem'}),
+                    html.P( [html.Br(), bot_response])
+            ],
                     style={
                         'textAlign': 'left',
                         'padding': '10px',
@@ -324,44 +289,142 @@ def update_chat(n_clicks, user_message):
                         'font-size': '1.2rem'
                     }
                 )
+            chat_history.insert(0, response_text)
+
+        if "goals" in user_message.lower() :
+            summary = lida.summarize("data.csv", summary_method="default")
+            response = bot.invoke(f""" As you are a Professional Data Analyst, give me 3 Potential goals (dont bold the words) 120-150 words only of the given data: {summary}. Give me Output Goal(i) \n
+                                  Description: \n
+                                  Visualization: \n
+                                  Reason: \n
+                                   for all 3""")
+            bot_response = response.content
+
+
+
+
+            pattern = r"Goal \((.*?)\)\s*Description:\s*(.*?)(?=\s*Visualization:|$)\s*Visualization:\s*(.*?)(?=\s*Reason:|$)\s*Reason:\s*(.*?)(?=\s*Goal|$)"
+            matches = re.findall(pattern, bot_response)
+
+            # Store data in JSON format
+            goals = []
+            for match in matches:
+                goal_index, description, visualization, reason = match
+                goals.append({
+                    "Goal Index": goal_index.strip(),
+                    "Description": description.strip(),
+                    "Visualization": visualization.strip(),
+                    "Reason": reason.strip()
+                })
+
+            
+
+            
+            for goal in goals:
+                a = f"Goal ({goal['Goal Index']}):"
+                b = f"Description: {goal['Description']}"
+                c = f"Visualization: {goal['Visualization']}"
+                d = f"Reason: {goal['Reason']}"
+                
+                response_text =  html.Div(
+                        children=[
+                        html.P(str(a),style={"font-weight": "bold",'font-size': '1.2rem'}),
+                        html.P(str(b)),
+                        html.P(str(c)),
+                        html.P(str(d)),
+
+                    ],
+                        style={
+                            'textAlign': 'left',
+                            'padding': '10px',
+                            'backgroundColor': '#f0f0f0',
+                            'borderRadius': '10px',
+                            'marginBottom': '10px',
+                            'width': 'fit-content',
+                            'maxWidth': '70%',
+                            'alignSelf': 'flex-start',
+                            'font-size': '1.2rem'
+                        }
+                    )
                 chat_history.insert(0, response_text) 
 
-        
-            
+
+        if "generate" in user_message.lower():
+
+            try:
+                df.chat(user_message)
+
                 
+                folder_path = "F:\\Assignment"  # Define the folder path
 
-            
-       
+                # Check if the folder exists
+                if os.path.exists(folder_path):
+                    # List all files in the folder
+                    files = os.listdir(folder_path)
+                    
+                    # Filter for .png files
+                    png_files = [file for file in files if file.lower().endswith(".png")]
 
-        
-           
-        
+                    if len(png_files) >= 1:
+                    
+                        # Rename .png files to 'img.png'
+                        for png_file in png_files:
+                            old_file_path = os.path.join(folder_path, png_file)
+                            new_file_path = os.path.join(folder_path, "image.png")
+                            os.rename(old_file_path, new_file_path)
 
+                        
 
-        
-        
-        
-        
+                        img =  "image.png"
+                    
+                        with open(img, "rb") as f:
+                            encoded_image = base64.b64encode(f.read()).decode()
 
+                            
+                        img_response = html.Img(src=f"data:image/jpeg;base64,{encoded_image}",
+                                style={
+                                "width": "50%",  # Adjust size as needed
+                                "float": "left",
+                            "margin-right": "10px",
+                                
+                            })
+                        chat_history.insert(0, img_response)
+                        os.remove("image.png")
 
+                else:
+                    response_text =  html.Div(
+                            "Sorry Could not able to generate the chart Please try again...",
+                            style={
+                                'textAlign': 'left',
+                                'padding': '10px',
+                                'backgroundColor': '#FF8A8A',
+                                'borderRadius': '10px',
+                                'marginBottom': '10px',
+                                'width': 'fit-content',
+                                'maxWidth': '70%',
+                                'alignSelf': 'flex-start',
+                                'font-size': '1.2rem'
+                            }
+                        )
+                    chat_history.insert(0, response_text) 
 
-        # Append the bot's response, aligned to the left
-        """
-        response_text =  html.Div(
-                bot_response,
-                style={
-                    'textAlign': 'left',
-                    'padding': '10px',
-                    'backgroundColor': '#f0f0f0',
-                    'borderRadius': '10px',
-                    'marginBottom': '10px',
-                    'width': 'fit-content',
-                    'maxWidth': '70%',
-                    'alignSelf': 'flex-start',
-                    'font-size': '1.2rem'
-                }
-            )
-        chat_history.insert(0, response_text) """
+            except Exception as e:
+                response_text =  html.Div(
+                            f"Sorry Error Occured.... {e}. please try again",
+                            style={
+                                'textAlign': 'left',
+                                'padding': '10px',
+                                'backgroundColor': '#FF8A8A',
+                                'borderRadius': '10px',
+                                'marginBottom': '10px',
+                                'width': 'fit-content',
+                                'maxWidth': '70%',
+                                'alignSelf': 'flex-start',
+                                'font-size': '1.2rem'
+                            }
+                        )
+                chat_history.insert(0, response_text) 
+
         
 
         # Return the updated chat history and clear the input field
@@ -371,6 +434,24 @@ def update_chat(n_clicks, user_message):
 
 
 
+
 # Run the app
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
