@@ -349,7 +349,7 @@ def update_chat(n_clicks, user_message):
                 chat_history.insert(0, response_text) 
 
 
-        if "generate" in user_message.lower():
+        if "generate" in user_message.lower() or "create" in user_message.lower():
 
             try:
                 df.chat(user_message)
