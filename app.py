@@ -425,7 +425,31 @@ def update_chat(n_clicks, user_message):
                         )
                 chat_history.insert(0, response_text) 
 
-        
+        else:
+            summary = lida.summarize("data.csv", summary_method="default")
+            response = bot.invoke(f" As you are a Professional Data Analyst, Answer this question: {user_message} based on the {summary} of the data ")
+            bot_response = response.content
+            
+            response_text =  html.Div(
+
+                bot_response,
+             
+                style={
+                    'textAlign': 'left',
+                    'padding': '10px',
+                    'backgroundColor': '#f0f0f0',
+                    'borderRadius': '10px',
+                    'marginBottom': '10px',
+                    'width': 'fit-content',
+                    'maxWidth': '70%',
+                    'alignSelf': 'flex-start',
+                    'font-size': '1.2rem'
+                }
+            )
+            chat_history.insert(0, response_text)
+
+
+
 
         # Return the updated chat history and clear the input field
         return chat_history, ''  # Clear the input field after sending the message
