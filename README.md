@@ -17,7 +17,7 @@ Break barriers in data interpretation and let PlotWise do the heavy lifting!
 
 
 # Chatbot Architecture
-![Inputs](architecture.png)
+
 
 
 
