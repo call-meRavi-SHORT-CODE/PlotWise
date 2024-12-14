@@ -449,6 +449,46 @@ def update_chat(n_clicks, user_message):
             chat_history.insert(0, response_text)
 
 
+            df.chat(user_message)
+
+                
+                folder_path = "F:\\Assignment"  # Define the folder path
+
+                # Check if the folder exists
+                if os.path.exists(folder_path):
+                    # List all files in the folder
+                    files = os.listdir(folder_path)
+                    
+                    # Filter for .png files
+                    png_files = [file for file in files if file.lower().endswith(".png")]
+
+                    if len(png_files) >= 1:
+                    
+                        # Rename .png files to 'img.png'
+                        for png_file in png_files:
+                            old_file_path = os.path.join(folder_path, png_file)
+                            new_file_path = os.path.join(folder_path, "image.png")
+                            os.rename(old_file_path, new_file_path)
+
+                        
+
+                        img =  "image.png"
+                    
+                        with open(img, "rb") as f:
+                            encoded_image = base64.b64encode(f.read()).decode()
+
+                            
+                        img_response = html.Img(src=f"data:image/jpeg;base64,{encoded_image}",
+                                style={
+                                "width": "50%",  # Adjust size as needed
+                                "float": "left",
+                            "margin-right": "10px",
+                                
+                            })
+                        chat_history.insert(0, img_response)
+                        os.remove("image.png")
+
+
 
 
         # Return the updated chat history and clear the input field
