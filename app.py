@@ -5,6 +5,7 @@ import pandas as pd
 import os
 from langchain_groq.chat_models import ChatGroq
 from pandasai import SmartDataframe
+import numpy as np
 
 # Dash
 import dash
