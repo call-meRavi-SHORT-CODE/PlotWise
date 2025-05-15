@@ -7,7 +7,7 @@
 
 # PlotWise: A chatbot assistant to analyze and visualize your data effortlessly 📈📊
 
-Imagine a world where data analysis and visualization come alive seamlessly 🌟.
+Imagine a world where data analysis and visualization come alive seamlessly 🌟..
 
 Features:
 1) **Chat with your data:** Ask questions and get real-time insights effortlessly.
