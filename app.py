@@ -267,31 +267,6 @@ def update_chat(n_clicks, user_message):
             chat_history.insert(0, response_text)
 
 
-
-        if "trends" in user_message.lower():
-            summary = lida.summarize("data.csv", summary_method="default")
-            response = bot.invoke(f" As you are a Professional Data Analyst, give me trends and key insights (dont bold the words) 120-150 words only of the given data: {summary}")
-            bot_response = response.content
-                
-            response_text =  html.Div(
-                    children=[
-                    html.H1("key insights and trends:",style={"font-weight": "bold",'font-size': '1.2rem'}),
-                    html.P( [html.Br(), bot_response])
-            ],
-                    style={
-                        'textAlign': 'left',
-                        'padding': '10px',
-                        'backgroundColor': '#f0f0f0',
-                        'borderRadius': '10px',
-                        'marginBottom': '10px',
-                        'width': 'fit-content',
-                        'maxWidth': '70%',
-                        'alignSelf': 'flex-start',
-                        'font-size': '1.2rem'
-                    }
-                )
-            chat_history.insert(0, response_text)
-
         if "goals" in user_message.lower() :
             summary = lida.summarize("data.csv", summary_method="default")
             response = bot.invoke(f""" As you are a Professional Data Analyst, give me 3 Potential goals (dont bold the words) 120-150 words only of the given data: {summary}. Give me Output Goal(i) \n
@@ -348,6 +323,34 @@ def update_chat(n_clicks, user_message):
                         }
                     )
                 chat_history.insert(0, response_text) 
+
+
+
+        if "trends" in user_message.lower():
+            summary = lida.summarize("data.csv", summary_method="default")
+            response = bot.invoke(f" As you are a Professional Data Analyst, give me trends and key insights (dont bold the words) 120-150 words only of the given data: {summary}")
+            bot_response = response.content
+                
+            response_text =  html.Div(
+                    children=[
+                    html.H1("key insights and trends:",style={"font-weight": "bold",'font-size': '1.2rem'}),
+                    html.P( [html.Br(), bot_response])
+            ],
+                    style={
+                        'textAlign': 'left',
+                        'padding': '10px',
+                        'backgroundColor': '#f0f0f0',
+                        'borderRadius': '10px',
+                        'marginBottom': '10px',
+                        'width': 'fit-content',
+                        'maxWidth': '70%',
+                        'alignSelf': 'flex-start',
+                        'font-size': '1.2rem'
+                    }
+                )
+            chat_history.insert(0, response_text)
+
+       
 
 
         if "generate" in user_message.lower() or "create" in user_message.lower():
@@ -503,6 +506,7 @@ def update_chat(n_clicks, user_message):
 # Run the app
 if __name__ == '__main__':
     app.run_server(debug=True)
+
 
 
 
