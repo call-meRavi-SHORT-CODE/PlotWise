@@ -32,6 +32,11 @@ import base64
 from PIL import Image
 
 
+
+
+## CSV File 
+data = pd.read_csv("data.csv")
+
 ## LLM (Groq Cloud)
 
 bot = ChatGroq(
@@ -40,9 +45,6 @@ bot = ChatGroq(
             model_name="llama-3.3-70b-versatile"
         )
 
-
-## CSV File 
-data = pd.read_csv("data.csv")
 
 config = {"save_charts":True,
               "save_charts_path":"F:\Assignment",
@@ -506,6 +508,7 @@ def update_chat(n_clicks, user_message):
 # Run the app
 if __name__ == '__main__':
     app.run_server(debug=True)
+
 
 
 
